@@ -10,13 +10,16 @@ import java.sql.SQLException;
 @RestController
 @RequestMapping("/schedule")
 public class ScheduleController {
-    @Autowired ScheduleService service;
-
     @GetMapping("/showAll")
+    //localhost:8001/schedule/showAll
     public Iterable<Schedule> showAllData() throws SQLException {
         return service.showAll();
     }
+
+
+    @Autowired ScheduleService service;
     @GetMapping("/add")
+    //    http://localhost:8001/schedule/add?patientId=1&postId=1&date=2022-12-23&price=9000
     public void insertData(@RequestParam int patientId,@RequestParam int postId,@RequestParam String date,@RequestParam double price) throws SQLException, ClassNotFoundException {
         service.insertData(new Schedule(-1,patientId,postId,date,price));
     }
